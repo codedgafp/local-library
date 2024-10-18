@@ -190,3 +190,9 @@
         <div id="popup-waring-message" class="text-center"></div>
     </div>
 {{/hasimportcapabilities}}
+
+{{#js}}
+    require(['theme_mentor/common'], function(common) {
+    common.moveSecondPrevstepToMain();
+    });
+{{/js}}

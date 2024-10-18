@@ -86,6 +86,7 @@
 <p id="library-dictionnary">{{trainings_dictionnary}}</p>
 
 {{#js}}
-    require(['theme_mentor/common']);
-    addClearFixToMainTag();
+    require(['theme_mentor/common'], function(common) {
+    common.addClearFixToMainTag();
+    });
 {{/js}}
