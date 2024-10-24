@@ -25,6 +25,8 @@
 
 namespace local_library;
 
+use local_mentor_specialization\custom_notifications_service;
+
 defined('MOODLE_INTERNAL') || die();
 
 use local_mentor_core;
@@ -32,6 +34,7 @@ use local_mentor_core\controller_base;
 use local_mentor_core\training;
 
 require_once($CFG->dirroot . '/local/mentor_core/classes/controllers/controller_base.php');
+require_once($CFG->dirroot . '/local/mentor_core/api/library.php');
 
 class library_controller extends controller_base {
 
@@ -55,6 +58,15 @@ class library_controller extends controller_base {
                     $trainingshortname = $this->get_param('trainingshortname', PARAM_TEXT);
                     $entityid = $this->get_param('entityid', PARAM_INT);
                     return $this->success(self::import_to_entity($trainingid, $trainingshortname, $entityid));
+                case 'get_user_collection_notifications':
+                    $type = $this->get_param('type', PARAM_RAW);
+                    return $this->success(self::get_user_collection_notifications($type));
+                case 'set_user_notifications':
+                    $notifications = $this->get_param('notifications');
+                    $type = $this->get_param('type', PARAM_RAW);
+                    return $this->success(self::set_user_notifications($notifications, $type));
+                case 'get_all_collections':
+                    return $this->success(self::get_all_collections());
                 default:
                     break;
             }
@@ -102,5 +114,49 @@ class library_controller extends controller_base {
     public static function import_to_entity($trainingid, $trainingshortname, $entityid) {
         return \local_mentor_core\library_api::import_to_entity($trainingid, $trainingshortname, $entityid);
     }
+
+        /**
+     * Get mentor collections
+     *
+     * @return array
+     */
+    public static function get_all_collections() {
+        return local_mentor_core\library_api::get_mentor_collections();
+    }
+
+        /**
+     * Get user customized notifications
+     *
+     * @return array
+     * @param string $type
+     * @throws \moodle_exception
+     */
+    public static function get_user_collection_notifications($type) {
+        if ($type != custom_notifications_service::$LIBRARY_PAGE_TYPE) {
+            throw new \moodle_exception( 'invaliddatausernotifpage', 'local_library');
+        }
+        return local_mentor_core\library_api::get_user_collection_notifications($type);
+    }
+
+    /**
+     * Set user customized notifications
+     *
+     * @param string $notifications
+     * @param string $type
+     * @return string
+     * @throws \moodle_exception
+     */
+    public static function set_user_notifications($notifications, $type) {
+        $notifications = json_decode( $notifications, true);
+        if (!is_array($notifications)) {
+            throw new \moodle_exception('invaliddatausernotif', 'local_library');
+        }
+        if ($type != custom_notifications_service::$LIBRARY_PAGE_TYPE) {
+            throw new \moodle_exception('invaliddatausernotifpage', 'local_library');
+        }
+        
+        return local_mentor_core\library_api::set_user_notifications($notifications, $type);
+    }
+    
 
 }

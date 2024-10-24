@@ -26,6 +26,9 @@
     </button>
 </div>
 <div id="local-library">
+    {{#showNotificationButton}}
+           {{> theme_boost/notification_button }}
+    {{/showNotificationButton}}     
     {{#trainingscount}}
         <div class="library-search">
             <input type="text" name="search" id="search" title="{{# str}}search_placeholder, local_mentor_specialization{{/str}}"
@@ -88,5 +91,8 @@
 {{#js}}
     require(['theme_mentor/common'], function(common) {
     common.addClearFixToMainTag();
+    });
+    require(['theme_mentor/notification'], function(notif) {
+    notif.init();
     });
 {{/js}}

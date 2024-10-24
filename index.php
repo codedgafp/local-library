@@ -59,6 +59,14 @@ $renderer = $PAGE->get_renderer('local_library', 'library');
 
 $PAGE->requires->jquery_plugin('ui');
 $PAGE->requires->jquery_plugin('ui-css');
+// Require strings for js.
+$PAGE->requires->strings_for_js(
+    [
+        'notification_button',
+        'subscription_management'
+    ]
+    , 'theme_mentor'
+);
 
 // Setting header page.
 $PAGE->set_heading(get_string('pluginname', 'local_library'));
