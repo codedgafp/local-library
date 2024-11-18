@@ -31,25 +31,42 @@ use \local_mentor_specialization\custom_notifications_service;
 
 class library_notifications_test extends advanced_testcase {
 
+    /**
+     * Init $CFG
+     */
+    public function init_config() {
+        global $CFG;
+
+        $CFG->mentor_specializations = [
+                '\\local_mentor_specialization\\mentor_specialization' =>
+                        'local/mentor_specialization/classes/mentor_specialization.php',
+        ];
+
+        local_mentor_specialization_init_collections_settings();
+        local_mentor_specialization_create_table_collection();
+        local_mentor_specialization_sync_table_collection();
+    }
      /**
      * Test get_mentor_collections
      *
      * @covers    \local_mentor_core\library_api::get_mentor_collections
      */
-    /*public function test_publication_library_task() {
+    public function test_publication_library_task() {
         $this->resetAfterTest(true);
+        $this->init_config();
         self::setAdminUser();
         $collections = \local_mentor_core\library_api::get_mentor_collections();
         self::assertNotEmpty($collections);
-    }*/
+    }
 
       /**
      * Test get_user_collection_notifications
      *
      * @covers    \local_mentor_core\library_api::get_user_collection_notifications
      */
-    /*public function test_get_user_collection_notifications() {
+    public function test_get_user_collection_notifications() {
         $this->resetAfterTest(true);
+        $this->init_config();
         self::setAdminUser();
         global $USER;
         $type = custom_notifications_service::$LIBRARY_PAGE_TYPE;
@@ -58,8 +75,7 @@ class library_notifications_test extends advanced_testcase {
 
 
         //Get collections available
-        $collections = \local_mentor_core\library_api::get_mentor_collections();
-        var_dump($collections);
+        $collections = array_values(\local_mentor_core\library_api::get_mentor_collections());
 
         //Notify user with collection id=1
         $notitifations = array(0 => array("id" => (int)$collections[1]->id,"notify" => true));
@@ -72,16 +88,17 @@ class library_notifications_test extends advanced_testcase {
         self::assertEquals($type,array_values($userNotifications)[0]->type);
         self::assertEquals($USER->id,array_values($userNotifications)[0]->user_id);
             
-    }*/
+    }
 
     /**
      * Test set_user_notifications
      *
      * @covers    \local_mentor_core\library_api::set_user_notifications
      */
-    /*public function test_set_user_notifications() {
+    public function test_set_user_notifications() {
 
         $this->resetAfterTest(true);
+        $this->init_config();
         self::setAdminUser();
 
         $type = custom_notifications_service::$LIBRARY_PAGE_TYPE;
@@ -90,7 +107,7 @@ class library_notifications_test extends advanced_testcase {
         self::assertEmpty($userNotifications);
 
         //Get available collections 
-        $collections = \local_mentor_core\library_api::get_mentor_collections();
+        $collections = array_values(\local_mentor_core\library_api::get_mentor_collections());
 
         //Notify user with collection id=1
         $notitifations = array(0 => array("id" => (int)$collections[1]->id,"notify" => true));
@@ -106,6 +123,6 @@ class library_notifications_test extends advanced_testcase {
         self::assertEmpty($userNotifications);    
 
         
-    }*/
+    }
 
 }
