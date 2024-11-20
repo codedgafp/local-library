@@ -136,6 +136,6 @@ Formation d’origine :
 $string['logoof'] = 'Logo de {$a}';
 
 $string['collection'] = 'Collection';
-$string['subscription_management_text'] = 'Vous serez informés chaque semaine par mél des nouvelles sessions disponibles dans une collection.';
+$string['library_subscription_management_text'] = 'Vous serez informés par mél lorsqu\'une publication sera disponible dans une collection.';
 $string['invaliddatausernotifpage'] = 'Notifications utilisateurs: page non valide';
 $string['invaliddatausernotif'] = 'Notifications utilisateurs: données invalides';

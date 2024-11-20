@@ -62,7 +62,7 @@ $PAGE->requires->jquery_plugin('ui-css');
 // Require strings for js.
 $PAGE->requires->strings_for_js(
     [
-        'notification_button',
+        'notification_library',
         'subscription_management'
     ]
     , 'theme_mentor'

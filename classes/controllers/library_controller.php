@@ -121,7 +121,7 @@ class library_controller extends controller_base {
      * @return array
      */
     public static function get_all_collections() {
-        return local_mentor_core\library_api::get_mentor_collections();
+        return array_values(local_mentor_core\library_api::get_mentor_collections());
     }
 
         /**
