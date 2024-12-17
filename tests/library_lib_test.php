@@ -68,10 +68,10 @@ class local_library_lib_testcase extends advanced_testcase {
         // Remove library entity and config.
         $dbi = \local_mentor_core\database_interface::get_instance();
         $category = core_course_category::get($dbi->get_library_object()->id);
-        $category->delete_full(false);
         unset_config(\local_mentor_core\library::CONFIG_VALUE_ID);
 
         $library = \local_mentor_core\library::get_instance();
+        
         $reflection = new ReflectionClass($library);
         $instance = $reflection->getProperty('instance');
         $instance->setAccessible(true); // Now we can modify that :).

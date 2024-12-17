@@ -26,9 +26,11 @@
     </button>
 </div>
 <div id="local-library">
-    {{#showNotificationButton}}
-           {{> theme_boost/notification_button }}
-    {{/showNotificationButton}}     
+    <div class="row justify-content-end">
+        {{#showNotificationButton}}
+            {{> theme_boost/notification_button }}
+        {{/showNotificationButton}}     
+    </div>
     {{#trainingscount}}
         <div class="library-search">
             <input type="text" name="search" id="search" title="{{# str}}search_placeholder, local_mentor_specialization{{/str}}"
