@@ -6,9 +6,8 @@ define([
     'jquery',
     'local_mentor_core/mentor',
     'format_edadmin/format_edadmin',
-    'core/str',
-    'local_mentor_core/select2'
-], function ($, mentor, format_edadmin, str, select2) {
+    'core/str'
+], function ($, mentor, format_edadmin, str) {
 
     var trainingLibrary = {
         /**
@@ -109,9 +108,6 @@ define([
                 if ($(e.target).hasClass('text-info')) {
                     return null;
                 }
-
-                $('#form-import-entity').select2()
-                    .data('select2').$container.addClass("custom-select");
 
                 format_edadmin.ajax_call({
                     url: M.cfg.wwwroot + '/local/library/ajax/ajax.php',
